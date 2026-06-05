@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, '../public')))
 // Rutas API (Joder andamos en eso aguanten)
   app.use('/api/auth',    require('./routes/auth.routes'))
 // app.use('/api/users',   require('./routes/user.routes'))
-// app.use('/api/blogs',   require('./routes/blog.routes'))
+  app.use('/api/blogs',   require('./routes/blog.routes'))
 // app.use('/api/content', require('./routes/content.routes'))
 
 // 404
