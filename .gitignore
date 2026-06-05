@@ -1,0 +1,27 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno 
+.env
+
+# Uploads generados en runtime
+uploads/
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Builds
+dist/
+build/
+
+# Tests
+coverage/

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — RetroBlog</title>
+  <link rel="stylesheet" href="/css/variables.css"/>
+  <link rel="stylesheet" href="/css/animations.css"/>
+  <link rel="stylesheet" href="/css/components.css"/>
+  <link rel="stylesheet" href="/css/layout.css"/>
+</head>
+<body class="auth-page">
+  <div class="scanlines"></div>
+
+  <div class="auth-card">
+    <h1 class="logo">RETRO<span class="neon">BLOG</span></h1>
+    <p class="auth-subtitle">Bienvenido de vuelta</p>
+    <button id="btn-login" class="btn btn-primary btn-full">
+      Iniciar sesión
+    </button>
+    <p class="auth-footer">
+      ¿No tienes cuenta? <a href="/pages/register.html">Créala aquí</a>
+    </p>
+  </div>
+
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+  <script src="/js/auth/auth0.js"></script>
+  <script src="/js/pages/login.js"></script>
+</body>
+</html>
