@@ -2,8 +2,8 @@ let auth0Client = null
 
 async function initAuth0() {
   auth0Client = await auth0.createAuth0Client({
-    domain:   'TU_DOMAIN.us.auth0.com',
-    clientId: 'TU_CLIENT_ID',
+    domain:   'dev-50mjhsdgyukm6snw.us.auth0.com',
+    clientId: '0ecwkrjMSzVeb5EFakb9cgniHvvDULzd',
     authorizationParams: {
       redirect_uri: 'http://localhost:3000/pages/dashboard.html',
       audience:     'https://retroblog-api',

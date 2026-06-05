@@ -8,7 +8,18 @@ const { corsOrigins } = require('./config/env')
 const app = express()
 
 // Seguridad
-app.use(helmet())
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc:  ["'self'"],
+      scriptSrc:   ["'self'", "https://cdn.auth0.com"],
+      styleSrc:    ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc:     ["'self'", "https://fonts.gstatic.com"],
+      connectSrc: ["'self'", `https://${process.env.AUTH0_DOMAIN}`, "https://cdn.auth0.com"],
+      imgSrc:      ["'self'", "data:", "https:"],
+    }
+  }
+}))
 app.use(cors({ origin: corsOrigins, credentials: true }))
 
 // Rate limit: máximo 100 requests por minuto por IP
