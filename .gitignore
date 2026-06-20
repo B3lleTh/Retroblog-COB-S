@@ -25,3 +25,6 @@ build/
 
 # Tests
 coverage/
+
+public/src/css/*.css
+public/src/css/*.map
