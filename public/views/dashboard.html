@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — RetroBlog</title>
+  <link rel="stylesheet" href="/css/variables.css"/>
+  <link rel="stylesheet" href="/css/animations.css"/>
+  <link rel="stylesheet" href="/css/components.css"/>
+  <link rel="stylesheet" href="/css/layout.css"/>
+  <link rel="stylesheet" href="/css/dashboard.css"/>
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <nav class="navbar">
+    <span class="logo">RETRO<span class="neon">BLOG</span></span>
+    <div class="nav-links">
+      <span id="user-email" class="user-email"></span>
+      <button id="btn-logout" class="btn btn-outline">Salir</button>
+    </div>
+  </nav>
+
+  <main class="dashboard-main">
+    <div class="dashboard-header">
+      <h1 class="dashboard-title">Mis <span class="neon">Blogs</span></h1>
+      <button id="btn-new-blog" class="btn btn-primary">+ Nuevo Blog</button>
+    </div>
+
+    <div id="blogs-grid" class="blogs-grid">
+      <div class="loading-text">Cargando...</div>
+    </div>
+  </main>
+
+  <!-- Modal nuevo blog -->
+  <div id="modal-new-blog" class="modal hidden">
+    <div class="modal-card">
+      <h2 class="modal-title">Nuevo <span class="neon">Blog</span></h2>
+      <div class="form-group">
+        <label>Título</label>
+        <input id="input-title" type="text" class="input" placeholder="Mi blog increíble"/>
+      </div>
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea id="input-desc" class="input" rows="3" placeholder="De qué trata tu blog..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button id="btn-cancel" class="btn btn-outline">Cancelar</button>
+        <button id="btn-create" class="btn btn-primary">Crear</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+  <script src="/js/auth/auth0.js"></script>
+  <script src="/js/auth/guard.js"></script>
+  <script src="/js/pages/dashboard.js"></script>
+</body>
+</html>

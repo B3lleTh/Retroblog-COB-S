@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>COB'S - Editor</title>
+    <link rel="stylesheet" href="../src/css/style.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css" rel="stylesheet">
+  </head>
+  <body>
+    <header class="editor-topbar">
+      <div class="topbar-left">
+        <a href="dashboard.html" class="back-link" aria-label="Volver al dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </a>
+
+        <div class="logo-mark">
+          <img src="./../src/images/cobs-logo.png" alt="Logo de cob's">
+        </div>
+
+        <span class="save-status"><span class="dot"></span>Guardado automáticamente</span>
+      </div>
+      
+      <div class="topbar-actions">
+        <button class="btn btn-ghost" id="btn-preview">
+          <div class="icon icon-eye"></div>
+          <span class="label">Vista previa</span>
+        </button>
+        
+        <button class="btn btn-coral" id="btn-publish">
+          Publicar
+          <div class="icon">
+            <span class="icon-arrow-up-right"></span>
+          </div>
+        </button>
+      </div>
+    </header>
+
+    <main class="editor-main">
+        <section class="editor-wrap">
+    
+          <div class="title-field">
+            <input
+              type="text"
+              id="titulo"
+              class="title-input"
+              placeholder="Título de tu publicación"
+              autocomplete="off"
+            >
+          </div>
+    
+          <div class="cover-field">
+            <div class="cover-dropzone" id="cover-dropzone">
+              <div class="cover-dropzone__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+              </div>
+              <div class="cover-dropzone__copy">
+                <span class="cover-dropzone__title">Agregar imagen de portada</span>
+                <span class="cover-dropzone__sub">Búscala en Unsplash o sube tu propia imagen</span>
+              </div>
+            </div>
+          </div>
+    
+          <div class="editor-field">
+            <div id="quill-editor"></div>
+            <div class="editor-footer">
+              <span class="char-count" id="char-count">0 caracteres</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    
+      <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+      <!-- Test --> <script src="https://unpkg.com/quill-html-edit-button@2.2.7/dist/quill.htmlEditButton.min.js"></script>
+      <script src="./../js/pages/editor.js"></script>
+  </body>
+</html>
