@@ -1,0 +1,133 @@
+$paper: #d2ccc9;
+
+header{
+  position: sticky;
+  padding: 14px 18px;
+  background-color: $secondary;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  .logo{
+    height: 32px;
+    color: #FFF;
+  }
+
+  .nav-links{
+    display: none;
+  }
+
+  .nav-cta{
+    display: flex;
+    align-items: center;
+
+    .nav-toggle{
+      display: inline-flex;
+      margin-left: 20px;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      background: transparent;
+      
+      .icon-burger{
+        width: 18px;
+      }
+      
+      .icon-close{
+        width: 18px;
+        display: none;
+      }
+    }
+  }
+
+  .nav-panel-inner{
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 67px;
+    left: 50%;
+    width: 90%;
+    padding: 10px 28px 20px;
+    background-color: $secondary;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    transform: translate(-50%, 0px);
+    
+    a{
+      width: 100%;
+      display: block;
+      min-height: 44px;
+      color: $paper;
+      font-size: 15px;
+      padding: 6px 0px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+
+      &:hover{
+        color: $primary-hover;
+      }
+
+      &:last-child {
+        border-bottom: none; 
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(md){
+  header{
+    padding: 16px 24px;
+    
+    .logo{
+      height: 36px;
+    }
+    
+    .nav-cta{
+      .nav-toggle{
+        width: 38px;
+        height: 38px;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg){
+  header{
+    padding: 18px 32px;
+    border-radius: 10px;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    
+    .logo{
+      height: 40px;
+    }
+
+    .nav-links{
+      display: block;
+      font-size: 16px;
+      @include adyacent-left(30px);
+      
+      a{
+        color: $paper;
+
+        &:hover{
+          color: $primary-hover;
+        }
+      }
+    }
+
+    .nav-cta{
+      .nav-toggle{
+        display: none;
+      }
+    }
+
+    .nav-panel-inner{
+      display: none;
+    }
+  }
+}

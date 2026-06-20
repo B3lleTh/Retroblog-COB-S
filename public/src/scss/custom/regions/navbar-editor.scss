@@ -1,0 +1,193 @@
+.editor-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 14px 18px;
+  background-color: $secondary;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  .logo-mark img {
+    height: 32px;
+    display: block;
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  .back-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: transparent;
+    color: $paper;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    &:hover {
+      color: $primary-hover;
+    }
+  }
+
+  .save-status {
+    font-size: 12.5px;
+    color: $paper;
+    display: none;
+    white-space: nowrap;
+
+    .dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #5fae6f;
+      margin-right: 6px;
+    }
+  }
+
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-left: 10px;
+      height: 36px;
+      width: 36px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      background: transparent;
+      color: $paper;
+
+      .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        overflow: hidden;
+
+        svg {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+      }
+
+      span.label {
+        display: none;
+      }
+
+      &:hover {
+        border-color: rgba(255, 255, 255, 0.3);
+        color: #fff;
+      }
+    }
+
+    .btn-coral {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-left: 10px;
+      height: 36px;
+      padding: 0 16px;
+      border: none;
+      border-radius: 999px;
+      background: $primary;
+      color: #0B0B0D;
+      font-weight: 500;
+      white-space: nowrap;
+
+      .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        background: rgba(11, 11, 13, 0.15);
+        overflow: hidden;
+
+        svg {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+      }
+
+      &:hover {
+        background: $primary-hover;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .editor-topbar {
+    padding: 16px 24px;
+
+    .logo-mark img {
+      height: 36px;
+    }
+
+    .save-status {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .topbar-actions {
+      .btn-ghost {
+        height: 38px;
+        width: auto;
+        padding: 0 18px;
+
+        span.label {
+          display: inline;
+        }
+      }
+
+      .btn-coral {
+        height: 38px;
+        padding: 0 20px;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .editor-topbar {
+    padding: 18px 32px;
+    border-radius: 10px;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+
+    .logo-mark img {
+      height: 40px;
+    }
+  }
+}

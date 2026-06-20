@@ -3,26 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>COBS</title>
-  <link rel="stylesheet" href="/css/variables.css"/>
-  <link rel="stylesheet" href="/css/animations.css"/>
-  <link rel="stylesheet" href="/css/components.css"/>
-  <link rel="stylesheet" href="/css/layout.css"/>
+  <title>COB'S Landing</title>
+  <link rel="stylesheet" href="./src/css/style.min.css"/>
 </head>
 <body>
-  <nav class="navbar">
-    <span class="logo">COB<span class="neon">'S</span></span>
-    <div class="nav-links">
-      <a href="/pages/login.html" class="btn btn-outline">Iniciar sesión</a>
-      <a href="/pages/register.html" class="btn btn-primary">Crear cuenta</a>
+  <header class="limiter-large">
+    <div class="logo">
+      <img src="./src/images/cobs-logo.png" alt="Logo de cob's">
     </div>
-  </nav>
 
-  <main class="hero">
-    <div class="scanlines"></div>
-    <h1 class="hero-title">Tu blog.<br/><span class="neon">Tu estilo.</span></h1>
-    <p class="hero-sub">Crea y personaliza tu propio blog con estilo retro.</p>
-    <a href="/pages/register.html" class="btn btn-primary btn-lg">Empezar gratis</a>
+    <nav class="nav-links">
+      <a href="#">Inicio</a>
+      <a href="#">Explorar</a>
+      <a href="#">Categorias</a>
+      <a href="#">Acerca de</a>
+    </nav>
+
+    <div class="nav-cta">
+      <a href="./views/editor.html" class="btn btn-coral">
+        Crear blog
+        <div class="icon">
+          <span class="icon-arrow-up-right"></span>
+        </div>
+      </a>
+
+      <a href="#" class="nav-toggle" aria-expanded="false">
+        <svg class="icon-burger" viewBox="0 0 24 24" fill="none" stroke="#d2ccc9" stroke-width="1.8" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="#d2ccc9" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+      </a>
+
+    </div>
+    
+    <div class="nav-panel-inner d-none" id="mobile-nav-panel">
+      <a href="#">Inicio</a>
+      <a href="#">Explorar</a>
+      <a href="#">Categorias</a>
+      <a href="#">Acerca de</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      
+    </section>
   </main>
+  <script src="./js/components/navbar.js"></script>
 </body>
 </html>
