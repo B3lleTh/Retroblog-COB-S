@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=VT323&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg:        #0d0d1a;
+  --bg2:       #13132b;
+  --primary:   #ff2d78;
+  --secondary: #00f0ff;
+  --purple:    #b44fff;
+  --text:      #e0e0ff;
+  --text-dim:  #7878aa;
+  --border:    #2a2a5a;
+  --card-bg:   #16163a;
+  --font-main: 'Orbitron', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-retro:'VT323', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  min-height: 100vh;
+}

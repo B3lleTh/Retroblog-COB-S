@@ -1,0 +1,11 @@
+@mixin adyacent-left($px){
+  > * + *{
+    margin-left: $px;
+  }
+}
+
+@mixin adyacent-top($px){
+  > * + *{
+    margin-top: $px;
+  }
+}
