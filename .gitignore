@@ -1,0 +1,26 @@
+# ── Dependencias ──────────────────────────────────────────────
+auth-service/node_modules/
+gateway/node_modules/
+
+# ── Variables de entorno (NUNCA subir secretos) ────────────────
+auth-service/.env
+gateway/.env
+
+# ── Prisma ──────────────────────────────────────────────────────
+# Migraciones SÍ se suben (son parte del historial de la DB).
+# Solo se ignora el cliente generado, que se regenera con `npx prisma generate`.
+auth-service/node_modules/.prisma/
+auth-service/generated/
+
+# ── Logs ──────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+
+# ── Sistema operativo ───────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editores ──────────────────────────────────────────────────
+.vscode/
+.idea/

@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog Platform — Verificar cuenta</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:           #09090b;
+      --surface:      #111113;
+      --surface2:     #18181b;
+      --border:       #27272a;
+      --border-focus: #3b82f6;
+      --text:         #fafafa;
+      --text-muted:   #71717a;
+      --text-dim:     #3f3f46;
+      --accent:       #3b82f6;
+      --accent-dark:  #2563eb;
+      --success-bg:   rgba(34,197,94,0.08);
+      --success-bd:   rgba(34,197,94,0.2);
+      --success-tx:   #86efac;
+      --error-bg:     rgba(239,68,68,0.08);
+      --error-bd:     rgba(239,68,68,0.2);
+      --error-tx:     #fca5a5;
+      --radius:       10px;
+      --radius-sm:    7px;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 392px;
+    }
+
+    /* ── Brand ── */
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      box-shadow: 0 0 0 1px rgba(59,130,246,0.3), 0 4px 16px rgba(59,130,246,0.15);
+    }
+
+    .brand-mark svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    .brand-name {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+    }
+
+    /* ── Email icon area ── */
+    .email-icon-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .email-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .email-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--accent);
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .card-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .card-sub strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── OTP inputs ── */
+    .otp-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .otp-input {
+      width: 48px;
+      height: 56px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 600;
+      font-family: inherit;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.12s, box-shadow 0.12s;
+      -webkit-appearance: none;
+      caret-color: var(--accent);
+    }
+
+    .otp-input:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+    }
+
+    .otp-input.filled {
+      border-color: rgba(59,130,246,0.5);
+    }
+
+    /* ── Button ── */
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--accent-dark);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .spinner {
+      width: 15px;
+      height: 15px;
+      border: 2px solid rgba(255,255,255,0.25);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.55s linear infinite;
+      display: none;
+      flex-shrink: 0;
+    }
+
+    .btn-primary.loading .spinner { display: block; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Alert ── */
+    .alert {
+      display: none;
+      padding: 11px 13px;
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      line-height: 1.5;
+      margin-top: 14px;
+    }
+
+    .alert.show-err {
+      display: block;
+      background: var(--error-bg);
+      border: 1px solid var(--error-bd);
+      color: var(--error-tx);
+    }
+
+    .alert.show-ok {
+      display: block;
+      background: var(--success-bg);
+      border: 1px solid var(--success-bd);
+      color: var(--success-tx);
+    }
+
+    /* ── Resend / back ── */
+    .actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .link-btn {
+      background: none;
+      border: none;
+      font-family: inherit;
+      font-size: 12.5px;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .link-btn.accent {
+      color: var(--accent);
+    }
+
+    .link-btn.accent:hover {
+      text-decoration: underline;
+    }
+
+    .link-btn.muted {
+      color: var(--text-muted);
+    }
+
+    .link-btn.muted:hover {
+      color: var(--text);
+    }
+
+    /* Resend cooldown */
+    #resend-timer {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0
+                   2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+        </svg>
+      </div>
+      <span class="brand-name">Blog Platform</span>
+    </div>
+
+    <div class="card">
+
+      <div class="email-icon-wrap">
+        <div class="email-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0
+                     2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </div>
+      </div>
+
+      <h1 class="card-title">Revisa tu email</h1>
+      <p class="card-sub" id="email-hint">
+        Te enviamos un código de 6 dígitos a<br>
+        <strong id="email-display">tu email</strong>
+      </p>
+
+      <!-- OTP inputs individuales para mejor UX -->
+      <div class="otp-row" id="otp-row">
+        <input class="otp-input" type="text" inputmode="numeric"
+               maxlength="1" id="otp-0" autocomplete="one-time-code" />
+        <input class="otp-input" type="text" inputmode="numeric"
+               maxlength="1" id="otp-1" />
+        <input class="otp-input" type="text" inputmode="numeric"
+               maxlength="1" id="otp-2" />
+        <input class="otp-input" type="text" inputmode="numeric"
+               maxlength="1" id="otp-3" />
+        <input class="otp-input" type="text" inputmode="numeric"
+               maxlength="1" id="otp-4" />
+        <input class="otp-input" type="text" inputmode="numeric"
+               maxlength="1" id="otp-5" />
+      </div>
+
+      <button class="btn-primary" id="btn-verify" onclick="doVerify()">
+        <span class="spinner" id="spin-verify"></span>
+        <span>Verificar cuenta</span>
+      </button>
+
+      <div class="alert" id="alert-verify"></div>
+
+      <div class="actions-row">
+        <button class="link-btn muted" onclick="goBack()">← Volver</button>
+        <span>
+          <button class="link-btn accent" id="btn-resend" onclick="doResend()">
+            Reenviar código
+          </button>
+          <span id="resend-timer" style="display:none"></span>
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    let userEmail = ''
+    let resendCooldown = null
+
+    // ── Init ──────────────────────────────────────────────────────────
+    window.addEventListener('DOMContentLoaded', () => {
+      // Si ya tiene sesión activa, ir al dashboard
+      if (Auth.isLoggedIn()) {
+        window.location.href = 'dashboard.html'
+        return
+      }
+
+      // Recuperar email prellenado por login.html al registrarse
+      userEmail = sessionStorage.getItem('bp_pending_email') || ''
+      if (userEmail) {
+        document.getElementById('email-display').textContent = userEmail
+      } else {
+        // Si no hay email guardado, mandarlo a login
+        window.location.href = 'login.html'
+        return
+      }
+
+      // Setup OTP inputs
+      setupOtpInputs()
+
+      // Focus en el primer campo al cargar
+      document.getElementById('otp-0').focus()
+    })
+
+    // ── OTP input behavior ────────────────────────────────────────────
+    function setupOtpInputs() {
+      const inputs = Array.from({ length: 6 }, (_, i) => document.getElementById(`otp-${i}`))
+
+      inputs.forEach((input, idx) => {
+        input.addEventListener('input', (e) => {
+          const val = e.target.value.replace(/\D/g, '')
+          e.target.value = val
+
+          if (val) {
+            e.target.classList.add('filled')
+            // Si pegaron varios dígitos de golpe (ej: desde el SMS)
+            if (val.length > 1) {
+              distributeOtp(val, idx, inputs)
+              return
+            }
+            if (idx < 5) inputs[idx + 1].focus()
+          } else {
+            e.target.classList.remove('filled')
+          }
+        })
+
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !input.value && idx > 0) {
+            inputs[idx - 1].value = ''
+            inputs[idx - 1].classList.remove('filled')
+            inputs[idx - 1].focus()
+          }
+          if (e.key === 'Enter') doVerify()
+        })
+
+        input.addEventListener('paste', (e) => {
+          e.preventDefault()
+          const pasted = (e.clipboardData || window.clipboardData)
+            .getData('text')
+            .replace(/\D/g, '')
+            .slice(0, 6)
+          distributeOtp(pasted, 0, inputs)
+        })
+      })
+    }
+
+    function distributeOtp(digits, startIdx, inputs) {
+      for (let i = 0; i < digits.length && startIdx + i < 6; i++) {
+        inputs[startIdx + i].value = digits[i]
+        inputs[startIdx + i].classList.add('filled')
+      }
+      // Focus en el siguiente vacío o en el último
+      const nextEmpty = inputs.findIndex((inp, i) => i >= startIdx && !inp.value)
+      const focusIdx = nextEmpty === -1 ? 5 : nextEmpty
+      inputs[focusIdx].focus()
+    }
+
+    function getOtpValue() {
+      return Array.from({ length: 6 }, (_, i) =>
+        document.getElementById(`otp-${i}`).value
+      ).join('')
+    }
+
+    function clearOtp() {
+      for (let i = 0; i < 6; i++) {
+        const el = document.getElementById(`otp-${i}`)
+        el.value = ''
+        el.classList.remove('filled')
+      }
+      document.getElementById('otp-0').focus()
+    }
+
+    // ── Alerts ────────────────────────────────────────────────────────
+    function showAlert(msg, type) {
+      const el = document.getElementById('alert-verify')
+      el.textContent = msg
+      el.className = 'alert ' + (type === 'ok' ? 'show-ok' : 'show-err')
+    }
+
+    function hideAlert() {
+      const el = document.getElementById('alert-verify')
+      el.textContent = ''
+      el.className = 'alert'
+    }
+
+    function setLoading(loading) {
+      document.getElementById('btn-verify').disabled = loading
+      document.getElementById('spin-verify').style.display = loading ? 'block' : 'none'
+    }
+
+    // ── Verify ────────────────────────────────────────────────────────
+    async function doVerify() {
+      const code = getOtpValue()
+
+      hideAlert()
+
+      if (code.length < 6) {
+        showAlert('Ingresa los 6 dígitos del código.', 'err')
+        return
+      }
+
+      setLoading(true)
+
+      try {
+        const res = await fetch(API + '/auth/verify-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: userEmail, code })
+        })
+
+        const data = await res.json()
+
+        if (!res.ok) {
+          showAlert(data.error || 'Código incorrecto.', 'err')
+          clearOtp()
+          return
+        }
+
+        showAlert('¡Cuenta verificada! Redirigiendo al login...', 'ok')
+        sessionStorage.removeItem('bp_pending_email')
+
+        setTimeout(() => {
+          window.location.href = 'login.html'
+        }, 1800)
+
+      } catch {
+        showAlert('No se pudo conectar con el servidor.', 'err')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    // ── Resend con cooldown de 60 seg ─────────────────────────────────
+    async function doResend() {
+      if (resendCooldown) return
+
+      hideAlert()
+
+      try {
+        const res = await fetch(API + '/auth/resend-code', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: userEmail })
+        })
+
+        const data = await res.json()
+
+        if (!res.ok) {
+          showAlert(data.error || 'No se pudo reenviar el código.', 'err')
+          return
+        }
+
+        showAlert('Código reenviado. Revisa tu email.', 'ok')
+        clearOtp()
+        startResendCooldown(60)
+
+      } catch {
+        showAlert('No se pudo conectar con el servidor.', 'err')
+      }
+    }
+
+    function startResendCooldown(seconds) {
+      const btn   = document.getElementById('btn-resend')
+      const timer = document.getElementById('resend-timer')
+      btn.style.display   = 'none'
+      timer.style.display = 'inline'
+
+      let remaining = seconds
+      timer.textContent = `Reenviar en ${remaining}s`
+
+      resendCooldown = setInterval(() => {
+        remaining--
+        timer.textContent = `Reenviar en ${remaining}s`
+        if (remaining <= 0) {
+          clearInterval(resendCooldown)
+          resendCooldown = null
+          btn.style.display   = 'inline'
+          timer.style.display = 'none'
+        }
+      }, 1000)
+    }
+
+    // ── Back ──────────────────────────────────────────────────────────
+    function goBack() {
+      sessionStorage.removeItem('bp_pending_email')
+      window.location.href = 'login.html'
+    }
+  </script>
+
+</body>
+</html>

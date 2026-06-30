@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog Platform — Dashboard</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #09090b;
+      --surface:    #111113;
+      --border:     #27272a;
+      --text:       #fafafa;
+      --text-muted: #71717a;
+      --accent:     #3b82f6;
+      --danger:     #ef4444;
+      --danger-bg:  rgba(239,68,68,0.1);
+      --radius:     10px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      background: var(--accent);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-mark svg { width: 16px; height: 16px; fill: #fff; }
+
+    .user-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .user-name {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .user-name strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    #btn-logout {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid rgba(239,68,68,0.2);
+      padding: 8px 14px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    #btn-logout:hover { background: rgba(239,68,68,0.18); }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    main h1 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    main p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: left;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .card strong { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0
+                   2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+        </svg>
+      </div>
+      Blog Platform
+    </div>
+
+    <div class="user-box">
+      <span class="user-name">Hola, <strong id="user-name">—</strong></span>
+      <button id="btn-logout">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
+          <polyline points="16 17 21 12 16 7"/>
+          <line x1="21" y1="12" x2="9" y2="12"/>
+        </svg>
+        Cerrar sesión
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <h1>Bienvenido a tu dashboard</h1>
+    <p>Tu sesión está activa y verificada. Aquí construirás el resto de la plataforma.</p>
+
+    <div class="card">
+      <p><strong>Email:</strong> <span id="user-email">—</span></p>
+      <p><strong>ID de usuario:</strong> <span id="user-id">—</span></p>
+    </div>
+  </main>
+
+  <script src="auth.js"></script>
+  <script>
+    // Protege esta página: si no hay sesión, redirige a login.html
+    Auth.requireAuth()
+
+    // Mostrar datos del usuario logueado
+    const session = Auth.getSession()
+    if (session && session.user) {
+      document.getElementById('user-name').textContent  = session.user.name
+      document.getElementById('user-email').textContent = session.user.email
+      document.getElementById('user-id').textContent    = session.user.id
+    }
+
+    // Logout real: revoca el refresh token en el backend y limpia sesión local
+    document.getElementById('btn-logout').addEventListener('click', () => {
+      Auth.logout()
+    })
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog Platform — Acceder</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:           #09090b;
+      --surface:      #111113;
+      --surface2:     #18181b;
+      --border:       #27272a;
+      --border-focus: #3b82f6;
+      --text:         #fafafa;
+      --text-muted:   #71717a;
+      --text-dim:     #3f3f46;
+      --accent:       #3b82f6;
+      --accent-dark:  #2563eb;
+      --success-bg:   rgba(34,197,94,0.08);
+      --success-bd:   rgba(34,197,94,0.2);
+      --success-tx:   #86efac;
+      --error-bg:     rgba(239,68,68,0.08);
+      --error-bd:     rgba(239,68,68,0.2);
+      --error-tx:     #fca5a5;
+      --radius:       10px;
+      --radius-sm:    7px;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ─────────────────────────────────────────────────────── */
+
+    .wrapper {
+      width: 100%;
+      max-width: 392px;
+    }
+
+    /* ── Brand ──────────────────────────────────────────────────────── */
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      box-shadow: 0 0 0 1px rgba(59,130,246,0.3), 0 4px 16px rgba(59,130,246,0.15);
+    }
+
+    .brand-mark svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    .brand-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .brand-tagline {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* ── Tab switcher ───────────────────────────────────────────────── */
+
+    .tab-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover:not(.active) {
+      color: var(--text);
+      background: var(--surface2);
+    }
+
+    .tab-btn.active {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* ── Card ───────────────────────────────────────────────────────── */
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    /* ── Panels ─────────────────────────────────────────────────────── */
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .panel-heading {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .panel-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+
+    /* ── Form fields ─────────────────────────────────────────────────── */
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .field input {
+      display: block;
+      width: 100%;
+      padding: 10px 13px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.12s, box-shadow 0.12s;
+      -webkit-appearance: none;
+    }
+
+    .field input::placeholder {
+      color: var(--text-dim);
+    }
+
+    .field input:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+
+    /* ── Button ─────────────────────────────────────────────────────── */
+
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.12s;
+      position: relative;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--accent-dark);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 15px;
+      height: 15px;
+      border: 2px solid rgba(255,255,255,0.25);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.55s linear infinite;
+      display: none;
+      flex-shrink: 0;
+    }
+
+    .btn-primary.loading .spinner {
+      display: block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── Alert ──────────────────────────────────────────────────────── */
+
+    .alert {
+      display: none;
+      padding: 11px 13px;
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      line-height: 1.5;
+      margin-top: 14px;
+    }
+
+    .alert.show-err {
+      display: block;
+      background: var(--error-bg);
+      border: 1px solid var(--error-bd);
+      color: var(--error-tx);
+    }
+
+    .alert.show-ok {
+      display: block;
+      background: var(--success-bg);
+      border: 1px solid var(--success-bd);
+      color: var(--success-tx);
+    }
+
+    /* ── Footer switch ───────────────────────────────────────────────── */
+
+    .switch-row {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .switch-row button {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-family: inherit;
+      font-size: inherit;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .switch-row button:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+
+    <!-- Brand -->
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0
+                   2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+        </svg>
+      </div>
+      <span class="brand-name">Blog Platform</span>
+      <span class="brand-tagline">Escribe y comparte lo que piensas</span>
+    </div>
+
+    <!-- Tab switcher -->
+    <div class="tab-row">
+      <button class="tab-btn active" id="tab-login"    onclick="switchTab('login')">Iniciar sesión</button>
+      <button class="tab-btn"        id="tab-register" onclick="switchTab('register')">Crear cuenta</button>
+    </div>
+
+    <!-- Card -->
+    <div class="card">
+
+      <!-- ── LOGIN ── -->
+      <div class="panel active" id="panel-login">
+        <p class="panel-heading">Bienvenido de nuevo</p>
+        <p class="panel-sub">Ingresa tus datos para continuar.</p>
+
+        <div class="field">
+          <label for="l-email">Email</label>
+          <input id="l-email" type="email" placeholder="tu@email.com"
+                 autocomplete="email" inputmode="email" />
+        </div>
+
+        <div class="field">
+          <label for="l-password">Contraseña</label>
+          <input id="l-password" type="password" placeholder="••••••••"
+                 autocomplete="current-password" />
+        </div>
+
+        <button class="btn-primary" id="btn-login" onclick="doLogin()">
+          <span class="spinner" id="spin-login"></span>
+          <span>Entrar</span>
+        </button>
+
+        <div class="alert" id="alert-login"></div>
+
+        <div class="switch-row">
+          ¿No tienes cuenta?
+          <button onclick="switchTab('register')">Regístrate gratis</button>
+        </div>
+      </div>
+
+      <!-- ── REGISTRO ── -->
+      <div class="panel" id="panel-register">
+        <p class="panel-heading">Crea tu cuenta</p>
+        <p class="panel-sub">Es gratis. Solo un email y contraseña.</p>
+
+        <div class="field">
+          <label for="r-name">Nombre</label>
+          <input id="r-name" type="text" placeholder="Tu nombre"
+                 autocomplete="name" />
+        </div>
+
+        <div class="field">
+          <label for="r-email">Email</label>
+          <input id="r-email" type="email" placeholder="tu@email.com"
+                 autocomplete="email" inputmode="email" />
+        </div>
+
+        <div class="field">
+          <label for="r-password">Contraseña</label>
+          <input id="r-password" type="password" placeholder="Mínimo 8 caracteres"
+                 autocomplete="new-password" />
+        </div>
+
+        <button class="btn-primary" id="btn-register" onclick="doRegister()">
+          <span class="spinner" id="spin-register"></span>
+          <span>Crear cuenta</span>
+        </button>
+
+        <div class="alert" id="alert-register"></div>
+
+        <div class="switch-row">
+          ¿Ya tienes cuenta?
+          <button onclick="switchTab('login')">Inicia sesión</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    // Si ya hay sesión activa, ir directo al dashboard
+    window.addEventListener('DOMContentLoaded', () => {
+      if (Auth.isLoggedIn()) {
+        window.location.href = 'dashboard.html'
+      }
+    })
+
+    // ── Tabs ──────────────────────────────────────────────────────────
+    function switchTab(tab) {
+      const isLogin = tab === 'login'
+      document.getElementById('tab-login').classList.toggle('active', isLogin)
+      document.getElementById('tab-register').classList.toggle('active', !isLogin)
+      document.getElementById('panel-login').classList.toggle('active', isLogin)
+      document.getElementById('panel-register').classList.toggle('active', !isLogin)
+      hideAlert('alert-login')
+      hideAlert('alert-register')
+    }
+
+    // ── Alerts ────────────────────────────────────────────────────────
+    function showAlert(id, msg, type) {
+      const el = document.getElementById(id)
+      el.textContent = msg
+      el.className = 'alert ' + (type === 'ok' ? 'show-ok' : 'show-err')
+    }
+
+    function hideAlert(id) {
+      const el = document.getElementById(id)
+      el.textContent = ''
+      el.className = 'alert'
+    }
+
+    // ── Loading state ─────────────────────────────────────────────────
+    function setLoading(btnId, spinId, loading) {
+      document.getElementById(btnId).disabled = loading
+      document.getElementById(spinId).style.display = loading ? 'block' : 'none'
+    }
+
+    // ── POST helper ───────────────────────────────────────────────────
+    async function apiPost(path, body) {
+      const res = await fetch(API + path, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      })
+      const data = await res.json()
+      return { ok: res.ok, data }
+    }
+
+    // ── Login ─────────────────────────────────────────────────────────
+    async function doLogin() {
+      const email    = document.getElementById('l-email').value.trim()
+      const password = document.getElementById('l-password').value
+
+      hideAlert('alert-login')
+
+      if (!email || !password) {
+        showAlert('alert-login', 'Completa todos los campos.', 'err')
+        return
+      }
+
+      setLoading('btn-login', 'spin-login', true)
+
+      try {
+        const { ok, data } = await apiPost('/auth/login', { email, password })
+
+        if (!ok) {
+          showAlert('alert-login', data.error || 'No se pudo iniciar sesión.', 'err')
+          return
+        }
+
+        Auth.saveSession(data)
+        window.location.href = 'dashboard.html'
+
+      } catch {
+        showAlert('alert-login', 'No se pudo conectar con el servidor.', 'err')
+      } finally {
+        setLoading('btn-login', 'spin-login', false)
+      }
+    }
+
+    // ── Register ──────────────────────────────────────────────────────
+    async function doRegister() {
+      const name     = document.getElementById('r-name').value.trim()
+      const email    = document.getElementById('r-email').value.trim()
+      const password = document.getElementById('r-password').value
+
+      hideAlert('alert-register')
+
+      if (!name || !email || !password) {
+        showAlert('alert-register', 'Completa todos los campos.', 'err')
+        return
+      }
+
+      if (password.length < 8) {
+        showAlert('alert-register', 'La contraseña debe tener al menos 8 caracteres.', 'err')
+        return
+      }
+
+      setLoading('btn-register', 'spin-register', true)
+
+      try {
+        const { ok, data } = await apiPost('/auth/register', { name, email, password })
+
+        if (!ok) {
+          showAlert('alert-register', data.error || 'No se pudo crear la cuenta.', 'err')
+          return
+        }
+
+        showAlert('alert-register', '¡Cuenta creada! Te enviamos un código de verificación.', 'ok')
+
+        // Guardar email para prellenar en verify.html
+        sessionStorage.setItem('bp_pending_email', email)
+
+        setTimeout(() => {
+          window.location.href = 'verify.html'
+        }, 1600)
+
+      } catch {
+        showAlert('alert-register', 'No se pudo conectar con el servidor.', 'err')
+      } finally {
+        setLoading('btn-register', 'spin-register', false)
+      }
+    }
+
+    // Enter key
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter') return
+      const loginActive = document.getElementById('panel-login').classList.contains('active')
+      if (loginActive) doLogin()
+      else doRegister()
+    })
+  </script>
+
+</body>
+</html>
